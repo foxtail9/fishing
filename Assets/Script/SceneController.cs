@@ -9,6 +9,8 @@ using System;
 public class SceneController: MonoBehaviour
 {
 
+    public static SceneController Instance { get; set; }
+
     public int NowStage_level = 1;
     public int MaxStage_level = 3;
     public Text NowStage_Text;
@@ -18,10 +20,10 @@ public class SceneController: MonoBehaviour
     public GameObject StageLev;
     public GameObject StageLock;
 
-    int isUnLock;
+    bool isUnLock;
 
-    enum Achive {unlock2, unlock3, unlock4, unlock5}
-    Achive[] achives;
+    public enum Achive {GameScene, GameScene1, GameScene2, GameScene3,GameScene4}
+    public Achive[] achives;
 
 
 
@@ -31,6 +33,12 @@ public class SceneController: MonoBehaviour
 
         if (!PlayerPrefs.HasKey("MyData"))
             init();
+
+
+        if (Instance == null)
+            Instance = this;
+      
+
 
     }
 
@@ -64,12 +72,15 @@ public class SceneController: MonoBehaviour
 
         PlayerPrefs.SetInt(achives[1].ToString(), 1);
 
+
+        Debug.Log(PlayerPrefs.GetInt("GameScene1"));
+
         for (int i = 2; i <= MaxStage_level; i++)
         {
             PlayerPrefs.SetInt(achives[i].ToString(), 0);
 
         }
-
+        PlayerPrefs.Save();
 
 
     }
@@ -86,9 +97,7 @@ public class SceneController: MonoBehaviour
     }
 
 
-    
- 
-
+   
 
     public void Left_Stage(){ 
     
@@ -119,10 +128,8 @@ public class SceneController: MonoBehaviour
 
     public void LoadLevel()
     {
-        SceneManager.LoadScene($"GameScene {NowStage_level}");
+        SceneManager.LoadScene($"GameScene{NowStage_level}");
     
-
-
     }
 
 
@@ -130,13 +137,14 @@ public class SceneController: MonoBehaviour
     {
 
 
-
-        if (NowStage_level != 1)
-        {
+       
             String ahiveName = achives[NowStage_level].ToString();
-            isUnLock = PlayerPrefs.GetInt(ahiveName);
+            Debug.Log(ahiveName);
+            Debug.Log(PlayerPrefs.GetInt(ahiveName));
+            
+            isUnLock = PlayerPrefs.GetInt(ahiveName) == 1;
 
-            if (isUnLock == 0)
+            if (!isUnLock)
             {
                 StageLock.SetActive(true);
                 StageLev.SetActive(false);
@@ -150,23 +158,8 @@ public class SceneController: MonoBehaviour
 
             }
 
-        }
-
-        else
-        {
-            StageLock.SetActive(false);
-            StageLev.SetActive(true);
-
-        }
-
-
-
+        
 
     }
-
-
-
-
-    
 
 }

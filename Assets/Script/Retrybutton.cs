@@ -2,23 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Text.RegularExpressions;
 
 public class Retrybutton : MonoBehaviour
 {
+
+    Scene scene;
+
     public void Retry()
     {
-        SceneManager.LoadScene("GameScene");
+
+        scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void GoStage()
     {
+
+
+
+        scene = SceneManager.GetActiveScene();
+        string stageName = scene.name;
+
+        string tempStr = Regex.Replace(stageName, @"\D", "");
         
+        int rstInt = int.Parse(tempStr);
+
+        PlayerPrefs.SetInt($"GameScene{rstInt+1}", 1);
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("StageSelect");
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
 }
