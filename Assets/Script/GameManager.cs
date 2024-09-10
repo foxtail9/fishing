@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public AudioClip clip;
     bool isfail = false;
 
+    public Board thisBoard;
+
     void Awake()
     {
         if (Instance == null)
@@ -36,7 +38,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        time += Time.deltaTime;
+        if (thisBoard.isCardDistributed == true)
+        {
+            time += Time.deltaTime;
+        }
         timeTxt.text = time.ToString("N2");
 
         if (time >= 30.0f)
