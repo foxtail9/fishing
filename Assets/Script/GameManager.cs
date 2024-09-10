@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     public GameObject endTxt;
     public GameObject board;
     public GameObject fail;
+
+    AudioSource audioSource;
+    public AudioClip clip;
     bool isfail = false;
 
     void Awake()
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1.0f;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -47,6 +51,8 @@ public class GameManager : MonoBehaviour
     {
         if (firstCard.index == secondCard.index)
         {
+
+            audioSource.PlayOneShot(clip);
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             cardCount -= 2;
