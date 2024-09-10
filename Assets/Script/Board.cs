@@ -8,10 +8,8 @@ public class Board : MonoBehaviour
 {
     public Transform cards;
     public GameObject card;
-    public GameObject cardMix;
 
     public bool isCardDistributed;
-    float speed = 0.1f;
 
     Dictionary<GameObject, Vector2> cardList = new Dictionary<GameObject, Vector2>();
 
