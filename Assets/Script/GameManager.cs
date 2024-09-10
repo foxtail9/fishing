@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Card firstCard;
     public Card secondCard;
     public int cardCount = 0;
+    public GameObject gameover;
     public GameObject endTxt;
     public GameObject board;
     public GameObject fail;
@@ -36,8 +37,9 @@ public class GameManager : MonoBehaviour
 
         if (time >= 30.0f)
         {
-            endTxt.SetActive(true);
+            gameover.SetActive(true);
             Time.timeScale = 0.0f;
+            board.SetActive(false);
         }
     }
 
