@@ -58,6 +58,7 @@ public class Board : MonoBehaviour
             generatedCard.transform.position = Vector2.Lerp(generatedCard.transform.position, cardTargetPosition, Time.deltaTime * 5f);
             yield return new WaitForSeconds(waitSeconds);
         }
+        yield return new WaitForSeconds(0.7f);
         isCardDistributed = true;
     }
 }
