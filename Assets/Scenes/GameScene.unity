@@ -1296,7 +1296,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cards: {fileID: 0}
   card: {fileID: 4843519886083340016, guid: 991d2bf734cee3a4aacf10317296e554, type: 3}
-  cardMix: {fileID: 0}
   isCardDistributed: 0
 --- !u!4 &1208641573
 Transform:

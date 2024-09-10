@@ -25,7 +25,7 @@ public class Board : MonoBehaviour
     {
         if (isCardDistributed == false)
         {
-            StartCoroutine(DistributeCard(0.03f));
+            StartCoroutine(DistributeCard(0.05f));
         }
     }
 
@@ -55,7 +55,7 @@ public class Board : MonoBehaviour
         {
             GameObject generatedCard = card.Key;
             Vector2 cardTargetPosition = card.Value;
-            generatedCard.transform.position = Vector2.Lerp(generatedCard.transform.position, cardTargetPosition, 0.1f);
+            generatedCard.transform.position = Vector2.Lerp(generatedCard.transform.position, cardTargetPosition, Time.deltaTime * 5f);
             yield return new WaitForSeconds(waitSeconds);
         }
         isCardDistributed = true;
