@@ -20,7 +20,7 @@ public class SceneController: MonoBehaviour
 
     int isUnLock;
 
-    enum Achive { unlock2, unlock3, unlock4}
+    enum Achive {unlock2, unlock3, unlock4, unlock5}
     Achive[] achives;
 
 
@@ -37,7 +37,7 @@ public class SceneController: MonoBehaviour
 
     void Start()
     {
-    
+
         
 
     }
@@ -50,11 +50,26 @@ public class SceneController: MonoBehaviour
         //스테이지 0이면 잠긴것, 1이면 이전에 클리어 한것
         PlayerPrefs.SetInt("MyData", 1);
 
+
+        /*
+         
         foreach (Achive achive in achives)
         {
             PlayerPrefs.SetInt(achive.ToString(), 0);
         
         }
+        */
+
+
+
+        PlayerPrefs.SetInt(achives[1].ToString(), 1);
+
+        for (int i = 2; i <= MaxStage_level; i++)
+        {
+            PlayerPrefs.SetInt(achives[i].ToString(), 0);
+
+        }
+
 
 
     }
@@ -81,7 +96,11 @@ public class SceneController: MonoBehaviour
             NowStage_level -= 1;
         else
             NowStage_level = 3;
+
+
+        UnlockState();
     
+
     }
 
     public void Right_Stage() {
@@ -92,6 +111,9 @@ public class SceneController: MonoBehaviour
         else
             NowStage_level = 1;
 
+
+
+        UnlockState();
     }
 
 
@@ -109,29 +131,42 @@ public class SceneController: MonoBehaviour
 
 
 
-        String ahiveName = achives[NowStage_level].ToString();
-        isUnLock = PlayerPrefs.GetInt(ahiveName);
+        if (NowStage_level != 1)
+        {
+            String ahiveName = achives[NowStage_level].ToString();
+            isUnLock = PlayerPrefs.GetInt(ahiveName);
 
-        if (isUnLock == 0)
+            if (isUnLock == 0)
+            {
+                StageLock.SetActive(true);
+                StageLev.SetActive(false);
+
+            }
+
+            else
+            {
+                StageLock.SetActive(false);
+                StageLev.SetActive(true);
+
+            }
+
+        }
+
+        else
         {
             StageLock.SetActive(false);
             StageLev.SetActive(true);
 
         }
 
-        else
-        {
-            StageLock.SetActive(true);
-            StageLev.SetActive(false);
 
-        }
 
 
     }
 
 
 
-    // 게임 클리어 시 정보를 저장하는 내용 만들어야.
+
     
 
 }
