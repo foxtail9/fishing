@@ -43,8 +43,8 @@ public class Card : MonoBehaviour
 
 
         anim.SetBool("isOpen", true);
-        front.SetActive(true);
-        back.SetActive(false);
+        Invoke("OpenCardInvoke", 0.1f);
+        
         if(GameManager.Instance.firstCard == null)
         {
             GameManager.Instance.firstCard = this;
@@ -56,6 +56,11 @@ public class Card : MonoBehaviour
         }
     }
 
+    void OpenCardInvoke()
+    {
+        front.SetActive(true);
+        back.SetActive(false);
+    }
 
     public void DestroyCard()
     {
