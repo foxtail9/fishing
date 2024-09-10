@@ -10,6 +10,11 @@ public class Retrybutton : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
+    public void SelectStage()
+    {
+        SceneManager.LoadScene("StageSelect");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
