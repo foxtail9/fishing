@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,21 +12,23 @@ public class GameManager : MonoBehaviour
     public Card secondCard;
     public int cardCount = 0;
     public GameObject endTxt;
+    public GameObject board;
+    public GameObject fail;
+    bool isfail = false;
 
     void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         Time.timeScale = 1.0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         time += Time.deltaTime;
@@ -39,44 +40,45 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0.0f;
         }
     }
-    public void checkMatched()
-    {
-        if(firstCard.index == secondCard.index)
-        {
-            firstCard.DestroyCard();
-            secondCard.DestroyCard();
-        }
-        else
-        {
-            firstCard.CloseCard();
-            secondCard.CloseCard();
-        }
-        firstCard = null;
-        secondCard = null;
-    }
-
 
     public void isMatched()
     {
-        if(firstCard.index == secondCard.index)
+        if (firstCard.index == secondCard.index)
         {
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             cardCount -= 2;
-            if(cardCount == 0)
+
+            if (cardCount == 0)
             {
                 endTxt.SetActive(true);
                 Time.timeScale = 0.0f;
+                board.SetActive(false);
             }
         }
         else
         {
+            isfail = true;
+
+            if (isfail)
+            {
+                fail.SetActive(true);
+                StartCoroutine(DisableFailAfterDelay(1.0f));
+
+                isfail = false;
+            }
+
             firstCard.CloseCard();
             secondCard.CloseCard();
         }
+
         firstCard = null;
         secondCard = null;
     }
 
-
+    private IEnumerator DisableFailAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        fail.SetActive(false);
+    }
 }
