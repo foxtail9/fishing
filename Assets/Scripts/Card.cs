@@ -57,7 +57,7 @@ public class Card : MonoBehaviour
         Invoke("DestroyCardInvoke", 1.0f);
     }
 
-    void DestoryCardInvoke()
+    void DestroyCardInvoke()
     {
         Destroy(gameObject);
     }
