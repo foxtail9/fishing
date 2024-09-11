@@ -400,7 +400,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.128
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1858,6 +1858,7 @@ MonoBehaviour:
   UnlockStage: {fileID: 1980578035}
   StageLev: {fileID: 632529691}
   StageLock: {fileID: 2009399235}
+  achives: 00000000010000000200000003000000
 --- !u!4 &1115502494
 Transform:
   m_ObjectHideFlags: 0

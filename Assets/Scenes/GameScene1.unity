@@ -561,7 +561,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 158977391}
         m_TargetAssemblyTypeName: Retrybutton, Assembly-CSharp
-        m_MethodName: Retry
+        m_MethodName: GoStage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
