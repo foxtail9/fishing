@@ -65,6 +65,7 @@ public class SceneController : MonoBehaviour
             NowStage_level += 1;
         else
             NowStage_level = 1;
+
         UnlockState();
     }
 
@@ -76,6 +77,10 @@ public class SceneController : MonoBehaviour
     public void UnlockState()
     {
         String ahiveName = achives[NowStage_level].ToString();
+        if (NowStage_level == 1)
+        {
+            PlayerPrefs.SetInt(ahiveName, 1);
+        }
 
         isUnLock = PlayerPrefs.GetInt(ahiveName) == 1;
 
