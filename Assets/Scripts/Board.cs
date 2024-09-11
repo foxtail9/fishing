@@ -8,6 +8,7 @@ public class Board : MonoBehaviour
 {
     public GameObject card;
 
+    [HideInInspector]
     public bool isCardDistributed;
 
     Dictionary<GameObject, Vector2> cardList = new Dictionary<GameObject, Vector2>();
@@ -34,13 +35,14 @@ public class Board : MonoBehaviour
         for (int i = 0; i < 16; i++)
         {
             GameObject go = Instantiate(card, this.transform);
+            go.transform.position = new Vector2(0f, -0.91f);
 
             float x = (i / 4) * 1.4f - 2.1f;
             float y = (i % 4) * 1.4f - 3.0f;
 
-            go.transform.position = new Vector2(0f, -0.91f);
             Vector2 targetPosition = new Vector2(x, y);
             cardList.Add(go, targetPosition);
+
             go.GetComponent<Card>().Setting(arr[i]);
         }
         GameManager.Instance.cardCount = arr.Length;
@@ -53,7 +55,9 @@ public class Board : MonoBehaviour
         {
             GameObject generatedCard = card.Key;
             Vector2 cardTargetPosition = card.Value;
-            generatedCard.transform.position = Vector2.Lerp(generatedCard.transform.position, cardTargetPosition, Time.deltaTime * 5f);
+            generatedCard.transform.position = Vector2.Lerp(generatedCard.transform.position,
+                                                            cardTargetPosition,
+                                                            Time.deltaTime * 5f);
             yield return new WaitForSeconds(waitSeconds);
         }
         yield return new WaitForSeconds(0.7f);
