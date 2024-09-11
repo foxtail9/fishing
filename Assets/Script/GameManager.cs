@@ -5,22 +5,23 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
-    public Text timeTxt;
-    float time = 0.0f;
-    public Card firstCard;
-    public Card secondCard;
-    public int cardCount = 0;
     public GameObject gameover;
     public GameObject endTxt;
     public GameObject board;
     public GameObject fail;
 
+    public Board thisBoard;
+    public Card firstCard;
+    public Card secondCard;
+
+    public Text timeTxt;
+
     AudioSource audioSource;
     public AudioClip clip;
-    bool isfail = false;
 
-    public Board thisBoard;
+    float time = 0.0f;
+    public int cardCount = 0;
+    bool isfail = false;
 
     void Awake()
     {

@@ -6,21 +6,18 @@ using System.Linq;
 
 public class Board : MonoBehaviour
 {
-    public Transform cards;
     public GameObject card;
 
     public bool isCardDistributed;
 
     Dictionary<GameObject, Vector2> cardList = new Dictionary<GameObject, Vector2>();
 
-    // Start is called before the first frame update
     void Start()
     {
         isCardDistributed = false;
         GenerateCard();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isCardDistributed == false)
@@ -51,6 +48,7 @@ public class Board : MonoBehaviour
 
     IEnumerator DistributeCard(float waitSeconds)
     {
+        yield return new WaitForSeconds(0.5f);
         foreach (KeyValuePair<GameObject, Vector2> card in cardList)
         {
             GameObject generatedCard = card.Key;
