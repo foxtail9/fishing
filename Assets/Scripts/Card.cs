@@ -14,6 +14,7 @@ public class Card : MonoBehaviour
 
     public int index = 0;
 
+
     public void Setting(int idx)
     {
         index = idx;

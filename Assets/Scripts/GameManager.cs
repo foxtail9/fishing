@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public int cardCount = 0;
     bool isfail = false;
 
+
     void Awake()
     {
         if (Instance == null)

@@ -13,6 +13,7 @@ public class Board : MonoBehaviour
 
     Dictionary<GameObject, Vector2> cardList = new Dictionary<GameObject, Vector2>();
 
+
     void Start()
     {
         isCardDistributed = false;
