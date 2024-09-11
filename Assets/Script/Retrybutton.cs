@@ -20,7 +20,6 @@ public class Retrybutton : MonoBehaviour
     {
 
 
-
         scene = SceneManager.GetActiveScene();
         string stageName = scene.name;
 

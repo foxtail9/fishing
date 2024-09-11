@@ -9,8 +9,7 @@ using System;
 public class SceneController: MonoBehaviour
 {
 
-    public static SceneController Instance { get; set; }
-
+ 
     public int NowStage_level = 1;
     public int MaxStage_level = 3;
     public Text NowStage_Text;
@@ -35,11 +34,6 @@ public class SceneController: MonoBehaviour
             init();
 
 
-        if (Instance == null)
-            Instance = this;
-      
-
-
     }
 
 
@@ -59,21 +53,7 @@ public class SceneController: MonoBehaviour
         PlayerPrefs.SetInt("MyData", 1);
 
 
-        /*
-         
-        foreach (Achive achive in achives)
-        {
-            PlayerPrefs.SetInt(achive.ToString(), 0);
-        
-        }
-        */
-
-
-
         PlayerPrefs.SetInt(achives[1].ToString(), 1);
-
-
-        Debug.Log(PlayerPrefs.GetInt("GameScene1"));
 
         for (int i = 2; i <= MaxStage_level; i++)
         {
@@ -139,9 +119,7 @@ public class SceneController: MonoBehaviour
 
        
             String ahiveName = achives[NowStage_level].ToString();
-            Debug.Log(ahiveName);
-            Debug.Log(PlayerPrefs.GetInt(ahiveName));
-            
+
             isUnLock = PlayerPrefs.GetInt(ahiveName) == 1;
 
             if (!isUnLock)
