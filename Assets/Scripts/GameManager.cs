@@ -1,15 +1,19 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    
     public static GameManager Instance;
+   
     public GameObject gameover;
     public GameObject endTxt;
     public GameObject board;
     public GameObject fail;
+  
 
     public Board thisBoard;
     public Card firstCard;
@@ -17,13 +21,17 @@ public class GameManager : MonoBehaviour
 
     public Text timeTxt;
 
+    
     AudioSource audioSource;
     public AudioClip clip;
-
+    public AudioClip fail_sound;
+    public AudioSource audioSource_warning;
+    public AudioSource bgm;
+   
     public int cardCount = 0;
     float time = 0.0f;
     bool isfail = false;
-
+    bool hurryUp = false;
 
     void Awake()
     {
@@ -37,9 +45,13 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         audioSource = GetComponent<AudioSource>();
+       
+
     }
 
     void Update()
+
+        
     {
         if (thisBoard.isCardDistributed == true)
         {
@@ -47,6 +59,13 @@ public class GameManager : MonoBehaviour
         }
         timeTxt.text = time.ToString("N2");
 
+        if(time >= 15.0f && hurryUp == false)
+        {
+            hurryUp = true;
+            bgm.pitch = 1.2f;
+            audioSource_warning.Play();
+        }
+        
         if (time >= 30.0f)
         {
             GameOver();
@@ -73,6 +92,7 @@ public class GameManager : MonoBehaviour
 
             if (isfail)
             {
+                audioSource.PlayOneShot(fail_sound);
                 fail.SetActive(true);
                 StartCoroutine(DisableFailAfterDelay(1.0f));
 
