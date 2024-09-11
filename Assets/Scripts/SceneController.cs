@@ -29,6 +29,8 @@ public class SceneController : MonoBehaviour
         if (!PlayerPrefs.HasKey("MyData"))
             init();
     }
+
+
     void init()
     {
         //스테이지 0이면 잠긴것, 1이면 이전에 클리어 한것
@@ -77,10 +79,6 @@ public class SceneController : MonoBehaviour
     public void UnlockState()
     {
         String ahiveName = achives[NowStage_level].ToString();
-        if (NowStage_level == 1)
-        {
-            PlayerPrefs.SetInt(ahiveName, 1);
-        }
 
         isUnLock = PlayerPrefs.GetInt(ahiveName) == 1;
 
@@ -94,10 +92,5 @@ public class SceneController : MonoBehaviour
             StageLock.SetActive(false);
             StageLev.SetActive(true);
         }
-    }
-
-    public void StageReset()
-    {
-        PlayerPrefs.DeleteAll();
     }
 }

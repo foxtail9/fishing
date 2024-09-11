@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
         firstCard = null;
         secondCard = null;
     }
+
     void GameOver()
     {
         gameover.SetActive(true);

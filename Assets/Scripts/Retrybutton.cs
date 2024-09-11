@@ -25,11 +25,7 @@ public class Retrybutton : MonoBehaviour
 
         PlayerPrefs.SetInt($"GameScene{rstInt + 1}", 1);
         PlayerPrefs.Save();
-
-        if (rstInt < 3)
-        {
-            SceneManager.LoadScene($"GameScene{rstInt + 1}");
-        }
+        SceneManager.LoadScene("StageSelect");
     }
 
     public void SelectStage()
