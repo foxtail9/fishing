@@ -95,4 +95,9 @@ public class SceneController : MonoBehaviour
             StageLev.SetActive(true);
         }
     }
+
+    public void StageReset()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }

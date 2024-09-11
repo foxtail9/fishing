@@ -993,6 +993,7 @@ MonoBehaviour:
   secondCard: {fileID: 0}
   timeTxt: {fileID: 1887917500}
   clip: {fileID: 8300000, guid: 32fec086b3fdbcd40a18678b1e6b5315, type: 3}
+  isClear: 0
   cardCount: 0
 --- !u!82 &519420034
 AudioSource:

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,8 +20,8 @@ public class GameManager : MonoBehaviour
     AudioSource audioSource;
     public AudioClip clip;
 
-    float time = 0.0f;
     public int cardCount = 0;
+    float time = 0.0f;
     bool isfail = false;
 
 
@@ -48,9 +49,7 @@ public class GameManager : MonoBehaviour
 
         if (time >= 30.0f)
         {
-            gameover.SetActive(true);
-            Time.timeScale = 0.0f;
-            board.SetActive(false);
+            GameOver();
         }
     }
 
@@ -65,9 +64,7 @@ public class GameManager : MonoBehaviour
 
             if (cardCount == 0)
             {
-                endTxt.SetActive(true);
-                Time.timeScale = 0.0f;
-                board.SetActive(false);
+                GameClear();
             }
         }
         else
@@ -88,6 +85,19 @@ public class GameManager : MonoBehaviour
 
         firstCard = null;
         secondCard = null;
+    }
+    void GameOver()
+    {
+        gameover.SetActive(true);
+        Time.timeScale = 0.0f;
+        board.SetActive(false);
+    }
+
+    void GameClear()
+    {
+        endTxt.SetActive(true);
+        Time.timeScale = 0.0f;
+        board.SetActive(false);
     }
 
     private IEnumerator DisableFailAfterDelay(float delay)
