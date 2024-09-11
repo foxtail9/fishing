@@ -746,6 +746,7 @@ MonoBehaviour:
   board: {fileID: 582807978}
   fail: {fileID: 1657136849}
   clip: {fileID: 8300000, guid: 32fec086b3fdbcd40a18678b1e6b5315, type: 3}
+  thisBoard: {fileID: 0}
 --- !u!82 &519420034
 AudioSource:
   m_ObjectHideFlags: 0
@@ -949,6 +950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cards: {fileID: 0}
   card: {fileID: 4843519886083340016, guid: 991d2bf734cee3a4aacf10317296e554, type: 3}
+  isCardDistributed: 0
 --- !u!4 &582807980
 Transform:
   m_ObjectHideFlags: 0
@@ -2672,7 +2674,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC2A4\uD14C\uC774\uC9C0 1/3\n"
+  m_Text: "\uC2A4\uD14C\uC774\uC9C0 1/3"
 --- !u!222 &1986086703
 CanvasRenderer:
   m_ObjectHideFlags: 0
