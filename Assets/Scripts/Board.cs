@@ -52,7 +52,7 @@ public class Board : MonoBehaviour
             Vector2 targetPosition = new Vector2(x, y);
             cardList.Add(go, targetPosition);
 
-            go.GetComponent<Card>().Setting(arr[i]);
+            go.GetComponent<Card>().Setting(stage_arr[i]);
         }
         GameManager.Instance.cardCount = stage_arr.Length;
     }
