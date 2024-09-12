@@ -39,7 +39,7 @@ public class Board : MonoBehaviour
         StageCardNum();
 
         int[] stage_arr = arr.Take(Stage_CardNum).ToArray();
-        stage_arr = stage_arr.OrderBy(x => Random.Range(0f, Stage_CardNum)).ToArray();
+        stage_arr = stage_arr.OrderBy(x => Random.Range(0f, stageLevel * 2 - 1)).ToArray();
 
         for (int i = 0; i < Stage_CardNum; i++)
         {
@@ -86,6 +86,6 @@ public class Board : MonoBehaviour
         string tempStr = Regex.Replace(stageName, @"\D", "");
         stageLevel = int.Parse(tempStr);
 
-        Stage_CardNum = 1 << stageLevel + 1;
+        Stage_CardNum = (stageLevel + 1) * 4;
     }
 }
