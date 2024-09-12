@@ -1,23 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
-using UnityEngine.SceneManagement;
 using System.Text.RegularExpressions;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Board : MonoBehaviour
 {
-
-    public int Max_Stage = 3;
-    public int Stage_CardNum;
-    public int stageLevel;
-
     public GameObject card;
 
     [HideInInspector]
     public bool isCardDistributed;
-      
+
     Dictionary<GameObject, Vector2> cardList = new Dictionary<GameObject, Vector2>();
+
+    public int Max_Stage = 3;
+    public int Stage_CardNum;
+    public int stageLevel;
 
 
     void Start()
@@ -36,16 +35,11 @@ public class Board : MonoBehaviour
 
     public void GenerateCard()
     {
-
         int[] arr = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
         StageCardNum();
 
-        Debug.Log(stageLevel);
         int[] stage_arr = arr.Take(Stage_CardNum).ToArray();
-        
         stage_arr = stage_arr.OrderBy(x => Random.Range(0f, Stage_CardNum)).ToArray();
-
-
 
         for (int i = 0; i < Stage_CardNum; i++)
         {
@@ -81,20 +75,12 @@ public class Board : MonoBehaviour
 
     public void StageCardNum()
     {
-
         Scene scene;
         scene = SceneManager.GetActiveScene();
         string stageName = scene.name;
         string tempStr = Regex.Replace(stageName, @"\D", "");
         stageLevel = int.Parse(tempStr);
 
-
-        Stage_CardNum = 1 << stageLevel +1;
-
-
-
-
+        Stage_CardNum = 1 << stageLevel + 1;
     }
-
-
 }
