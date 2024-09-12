@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         }
         timeTxt.text = time.ToString("N2");
 
-        if(time >= 15.0f && hurryUp == false)
+        if (time >= 15.0f && hurryUp == false)
         {
             hurryUp = true;
             bgm.pitch = 1.2f;

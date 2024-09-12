@@ -36,7 +36,7 @@ public class Card : MonoBehaviour
         anim.SetBool("isOpen", true);
         Invoke("OpenCardInvoke", 0.1f);
         
-        if(GameManager.Instance.firstCard == null)
+        if (GameManager.Instance.firstCard == null)
         {
             GameManager.Instance.firstCard = this;
         }
