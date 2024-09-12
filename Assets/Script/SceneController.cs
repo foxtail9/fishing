@@ -9,7 +9,7 @@ using System;
 public class SceneController: MonoBehaviour
 {
 
- 
+    public int min_Level = 1;
     public int NowStage_level = 1;
     public int MaxStage_level = 3;
     public Text NowStage_Text;
@@ -81,10 +81,10 @@ public class SceneController: MonoBehaviour
 
     public void Left_Stage(){ 
     
-        if(NowStage_level > 1)
+        if(NowStage_level > min_Level)
             NowStage_level -= 1;
         else
-            NowStage_level = 3;
+            NowStage_level = MaxStage_level;
 
 
         UnlockState();
@@ -94,11 +94,11 @@ public class SceneController: MonoBehaviour
 
     public void Right_Stage() {
 
-        if (NowStage_level < 3)
+        if (NowStage_level < MaxStage_level)
             NowStage_level += 1;
 
         else
-            NowStage_level = 1;
+            NowStage_level = min_Level;
 
 
 
