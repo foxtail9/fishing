@@ -45,13 +45,9 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         audioSource = GetComponent<AudioSource>();
-       
-
     }
 
     void Update()
-
-        
     {
         if (thisBoard.isCardDistributed == true)
         {
