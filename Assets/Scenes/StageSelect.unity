@@ -448,7 +448,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420033}
   - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
@@ -531,28 +530,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad573e6e700550a4ab603b475fe4640a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameover: {fileID: 0}
-  endTxt: {fileID: 0}
-  board: {fileID: 0}
-  fail: {fileID: 0}
-  thisBoard: {fileID: 0}
-  firstCard: {fileID: 0}
-  secondCard: {fileID: 0}
-  timeTxt: {fileID: 0}
-  clip: {fileID: 8300000, guid: 32fec086b3fdbcd40a18678b1e6b5315, type: 3}
-  cardCount: 0
 --- !u!82 &519420034
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1121,12 +1098,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1cfc13b4704b7643a47cfa2a326236f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageLev: {fileID: 632529691}
-  StageLock: {fileID: 2009399235}
-  NowStage_Text: {fileID: 1986086702}
-  UnlockStage: {fileID: 1980578035}
+  min_Level: 1
   NowStage_level: 1
   MaxStage_level: 3
+  NowStage_Text: {fileID: 1986086702}
+  UnlockStage: {fileID: 1980578035}
+  StageLev: {fileID: 632529691}
+  StageLock: {fileID: 2009399235}
   achives: 00000000010000000200000003000000
 --- !u!4 &1115502494
 Transform:
