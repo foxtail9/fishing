@@ -13,17 +13,11 @@ public class SceneController : MonoBehaviour
     public int NowStage_level = 1;
     public int MaxStage_level = 3;
     public Text NowStage_Text;
-
     public Text UnlockStage;
 
     public GameObject StageLev;
     public GameObject StageLock;
-    public Text NowStage_Text;
-    public Text UnlockStage;
-
-    public int NowStage_level = 1;
-    public int MaxStage_level = 3;
-
+  
     bool isUnLock;
 
     public enum Achive { GameScene, GameScene1, GameScene2, GameScene3, GameScene4 }
