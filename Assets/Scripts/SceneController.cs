@@ -49,7 +49,7 @@ public class SceneController : MonoBehaviour
 
     public void Update()
     {
-        NowStage_Text.text = $"�������� {NowStage_level}  /  {MaxStage_level}";
+        NowStage_Text.text = $"스테이지 {NowStage_level}  /  {MaxStage_level}";
         UnlockStage.text = NowStage_level.ToString();
     }
 
