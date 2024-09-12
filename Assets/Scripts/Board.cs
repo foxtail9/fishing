@@ -67,11 +67,16 @@ public class Board : MonoBehaviour
             generatedCard.transform.position = Vector2.Lerp(generatedCard.transform.position,
                                                             cardTargetPosition,
                                                             Time.deltaTime * 5f);
+            if (Vector2.Distance(generatedCard.transform.position, cardTargetPosition) <= 0.01f)
+            {
+                generatedCard.transform.position = cardTargetPosition;
+            }
             yield return new WaitForSeconds(waitSeconds);
         }
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1.0f);
         isCardDistributed = true;
     }
+
 
     public void StageCardNum()
     {
