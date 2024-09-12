@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    public int index = 0;
-    public SpriteRenderer frontImage;
-    public Animator anim;
     public GameObject front;
     public GameObject back;
+    public SpriteRenderer frontImage;
+    public Animator anim;
 
     AudioSource audioSource;
     public AudioClip clip;
+
+    public int index = 0;
+
 
     public void Setting(int idx)
     {
@@ -19,17 +21,9 @@ public class Card : MonoBehaviour
         frontImage.sprite = Resources.Load<Sprite>($"rtan{index}");
     }
 
-
-    // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void OpenCard()
@@ -37,10 +31,7 @@ public class Card : MonoBehaviour
 
         if (GameManager.Instance.secondCard != null) return;
 
-
-
         audioSource.PlayOneShot(clip);
-
 
         anim.SetBool("isOpen", true);
         Invoke("OpenCardInvoke", 0.1f);
@@ -66,19 +57,21 @@ public class Card : MonoBehaviour
     {
         Invoke("DestroyCardInvoke", 1.0f);
     }
-    void DestoryCardInvoke()
+
+    void DestroyCardInvoke()
     {
         Destroy(gameObject);
     }
+
     public void CloseCard()
     {
         Invoke("CloseCardInvoke", 1.0f);
     }
+
     void CloseCardInvoke()
     {
         anim.SetBool("isOpen", false);
         front.SetActive(false);
         back.SetActive(true);
     }
-
 }

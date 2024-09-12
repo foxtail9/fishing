@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
-public class SceneController: MonoBehaviour
+public class SceneController : MonoBehaviour
 {
 
     public int min_Level = 1;
@@ -18,12 +18,16 @@ public class SceneController: MonoBehaviour
 
     public GameObject StageLev;
     public GameObject StageLock;
+    public Text NowStage_Text;
+    public Text UnlockStage;
+
+    public int NowStage_level = 1;
+    public int MaxStage_level = 3;
 
     bool isUnLock;
 
-    public enum Achive {GameScene, GameScene1, GameScene2, GameScene3,GameScene4}
+    public enum Achive { GameScene, GameScene1, GameScene2, GameScene3, GameScene4 }
     public Achive[] achives;
-
 
 
     void Awake()
@@ -32,48 +36,27 @@ public class SceneController: MonoBehaviour
 
         if (!PlayerPrefs.HasKey("MyData"))
             init();
-
-
     }
-
-
-    void Start()
-    {
-
-        
-
-    }
-
 
 
     void init()
     {
-
-        //½ºÅ×ÀÌÁö 0ÀÌ¸é Àá±ä°Í, 1ÀÌ¸é ÀÌÀü¿¡ Å¬¸®¾î ÇÑ°Í
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½, 1ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½
         PlayerPrefs.SetInt("MyData", 1);
-
 
         PlayerPrefs.SetInt(achives[1].ToString(), 1);
 
         for (int i = 2; i <= MaxStage_level; i++)
         {
             PlayerPrefs.SetInt(achives[i].ToString(), 0);
-
         }
         PlayerPrefs.Save();
-
-
     }
-    
-
-
-
 
     public void Update()
     {
-        NowStage_Text.text = $"½ºÅ×ÀÌÁö {NowStage_level}  /  {MaxStage_level}";
+        NowStage_Text.text = $"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ {NowStage_level}  /  {MaxStage_level}";
         UnlockStage.text = NowStage_level.ToString();
-
     }
 
 
@@ -86,58 +69,39 @@ public class SceneController: MonoBehaviour
         else
             NowStage_level = MaxStage_level;
 
-
         UnlockState();
-    
-
     }
 
     public void Right_Stage() {
 
         if (NowStage_level < MaxStage_level)
             NowStage_level += 1;
-
         else
             NowStage_level = min_Level;
-
-
 
         UnlockState();
     }
 
-
     public void LoadLevel()
     {
         SceneManager.LoadScene($"GameScene{NowStage_level}");
-    
     }
-
 
     public void UnlockState()
     {
+        String ahiveName = achives[NowStage_level].ToString();
 
+        isUnLock = PlayerPrefs.GetInt(ahiveName) == 1;
 
-       
-            String ahiveName = achives[NowStage_level].ToString();
-
-            isUnLock = PlayerPrefs.GetInt(ahiveName) == 1;
-
-            if (!isUnLock)
-            {
-                StageLock.SetActive(true);
-                StageLev.SetActive(false);
-
-            }
-
-            else
-            {
-                StageLock.SetActive(false);
-                StageLev.SetActive(true);
-
-            }
-
-        
-
+        if (!isUnLock)
+        {
+            StageLock.SetActive(true);
+            StageLev.SetActive(false);
+        }
+        else
+        {
+            StageLock.SetActive(false);
+            StageLev.SetActive(true);
+        }
     }
-
 }

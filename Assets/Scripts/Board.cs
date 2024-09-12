@@ -6,28 +6,25 @@ using System.Linq;
 
 public class Board : MonoBehaviour
 {
-    public Transform cards;
     public GameObject card;
-    public GameObject cardMix;
 
+    [HideInInspector]
     public bool isCardDistributed;
-    float speed = 0.1f;
 
     Dictionary<GameObject, Vector2> cardList = new Dictionary<GameObject, Vector2>();
 
-    // Start is called before the first frame update
+
     void Start()
     {
         isCardDistributed = false;
         GenerateCard();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isCardDistributed == false)
         {
-            StartCoroutine(DistributeCard(0.03f));
+            StartCoroutine(DistributeCard(0.05f));
         }
     }
 
@@ -39,13 +36,14 @@ public class Board : MonoBehaviour
         for (int i = 0; i < 16; i++)
         {
             GameObject go = Instantiate(card, this.transform);
+            go.transform.position = new Vector2(0f, -0.91f);
 
             float x = (i / 4) * 1.4f - 2.1f;
             float y = (i % 4) * 1.4f - 3.0f;
 
-            go.transform.position = new Vector2(0f, -0.91f);
             Vector2 targetPosition = new Vector2(x, y);
             cardList.Add(go, targetPosition);
+
             go.GetComponent<Card>().Setting(arr[i]);
         }
         GameManager.Instance.cardCount = arr.Length;
@@ -53,13 +51,17 @@ public class Board : MonoBehaviour
 
     IEnumerator DistributeCard(float waitSeconds)
     {
+        yield return new WaitForSeconds(0.5f);
         foreach (KeyValuePair<GameObject, Vector2> card in cardList)
         {
             GameObject generatedCard = card.Key;
             Vector2 cardTargetPosition = card.Value;
-            generatedCard.transform.position = Vector2.Lerp(generatedCard.transform.position, cardTargetPosition, 0.1f);
+            generatedCard.transform.position = Vector2.Lerp(generatedCard.transform.position,
+                                                            cardTargetPosition,
+                                                            Time.deltaTime * 5f);
             yield return new WaitForSeconds(waitSeconds);
         }
+        yield return new WaitForSeconds(0.7f);
         isCardDistributed = true;
     }
 }

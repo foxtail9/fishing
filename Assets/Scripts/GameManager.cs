@@ -1,26 +1,37 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    
     public static GameManager Instance;
-
-    public Text timeTxt;
-    float time = 0.0f;
-    public Card firstCard;
-    public Card secondCard;
-    public int cardCount = 0;
+   
     public GameObject gameover;
     public GameObject endTxt;
     public GameObject board;
     public GameObject fail;
-
-    AudioSource audioSource;
-    public AudioClip clip;
-    bool isfail = false;
+  
 
     public Board thisBoard;
+    public Card firstCard;
+    public Card secondCard;
+
+    public Text timeTxt;
+
+    
+    AudioSource audioSource;
+    public AudioClip clip;
+    public AudioClip fail_sound;
+    public AudioSource audioSource_warning;
+    public AudioSource bgm;
+   
+    public int cardCount = 0;
+    float time = 0.0f;
+    bool isfail = false;
+    bool hurryUp = false;
 
     void Awake()
     {
@@ -34,9 +45,13 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         audioSource = GetComponent<AudioSource>();
+       
+
     }
 
     void Update()
+
+        
     {
         if (thisBoard.isCardDistributed == true)
         {
@@ -44,11 +59,16 @@ public class GameManager : MonoBehaviour
         }
         timeTxt.text = time.ToString("N2");
 
+        if(time >= 15.0f && hurryUp == false)
+        {
+            hurryUp = true;
+            bgm.pitch = 1.2f;
+            audioSource_warning.Play();
+        }
+        
         if (time >= 30.0f)
         {
-            gameover.SetActive(true);
-            Time.timeScale = 0.0f;
-            board.SetActive(false);
+            GameOver();
         }
     }
 
@@ -56,7 +76,6 @@ public class GameManager : MonoBehaviour
     {
         if (firstCard.index == secondCard.index)
         {
-
             audioSource.PlayOneShot(clip);
             firstCard.DestroyCard();
             secondCard.DestroyCard();
@@ -64,9 +83,7 @@ public class GameManager : MonoBehaviour
 
             if (cardCount == 0)
             {
-                endTxt.SetActive(true);
-                Time.timeScale = 0.0f;
-                board.SetActive(false);
+                GameClear();
             }
         }
         else
@@ -75,6 +92,7 @@ public class GameManager : MonoBehaviour
 
             if (isfail)
             {
+                audioSource.PlayOneShot(fail_sound);
                 fail.SetActive(true);
                 StartCoroutine(DisableFailAfterDelay(1.0f));
 
@@ -87,6 +105,20 @@ public class GameManager : MonoBehaviour
 
         firstCard = null;
         secondCard = null;
+    }
+
+    void GameOver()
+    {
+        gameover.SetActive(true);
+        Time.timeScale = 0.0f;
+        board.SetActive(false);
+    }
+
+    void GameClear()
+    {
+        endTxt.SetActive(true);
+        Time.timeScale = 0.0f;
+        board.SetActive(false);
     }
 
     private IEnumerator DisableFailAfterDelay(float delay)
