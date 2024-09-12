@@ -21,9 +21,9 @@ public class Retrybutton : MonoBehaviour
 
         string tempStr = Regex.Replace(stageName, @"\D", "");
         
-        int rstInt = int.Parse(tempStr);
+        int stageLevel = int.Parse(tempStr);
 
-        PlayerPrefs.SetInt($"GameScene{rstInt + 1}", 1);
+        PlayerPrefs.SetInt($"GameScene{stageLevel + 1}", 1);
         PlayerPrefs.Save();
         SceneManager.LoadScene("StageSelect");
     }

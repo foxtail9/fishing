@@ -8,14 +8,16 @@ using System;
 
 public class SceneController : MonoBehaviour
 {
-    public GameObject StageLev;
-    public GameObject StageLock;
+
+    public int min_Level = 1;
+    public int NowStage_level = 1;
+    public int MaxStage_level = 3;
     public Text NowStage_Text;
     public Text UnlockStage;
 
-    public int NowStage_level = 1;
-    public int MaxStage_level = 3;
-
+    public GameObject StageLev;
+    public GameObject StageLock;
+  
     bool isUnLock;
 
     public enum Achive { GameScene, GameScene1, GameScene2, GameScene3, GameScene4 }
@@ -33,7 +35,7 @@ public class SceneController : MonoBehaviour
 
     void init()
     {
-        //½ºÅ×ÀÌÁö 0ÀÌ¸é Àá±ä°Í, 1ÀÌ¸é ÀÌÀü¿¡ Å¬¸®¾î ÇÑ°Í
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½, 1ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½
         PlayerPrefs.SetInt("MyData", 1);
 
         PlayerPrefs.SetInt(achives[1].ToString(), 1);
@@ -47,26 +49,29 @@ public class SceneController : MonoBehaviour
 
     public void Update()
     {
-        NowStage_Text.text = $"½ºÅ×ÀÌÁö {NowStage_level}  /  {MaxStage_level}";
+        NowStage_Text.text = $"ìŠ¤í…Œì´ì§€ {NowStage_level}  /  {MaxStage_level}";
         UnlockStage.text = NowStage_level.ToString();
     }
 
-    public void Left_Stage()
-    {
-        if (NowStage_level > 1)
+
+   
+
+    public void Left_Stage(){ 
+    
+        if(NowStage_level > min_Level)
             NowStage_level -= 1;
         else
-            NowStage_level = 3;
+            NowStage_level = MaxStage_level;
 
         UnlockState();
     }
 
-    public void Right_Stage()
-    {
-        if (NowStage_level < 3)
+    public void Right_Stage() {
+
+        if (NowStage_level < MaxStage_level)
             NowStage_level += 1;
         else
-            NowStage_level = 1;
+            NowStage_level = min_Level;
 
         UnlockState();
     }
