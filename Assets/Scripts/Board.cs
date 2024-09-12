@@ -88,6 +88,8 @@ public class Board : MonoBehaviour
         string tempStr = Regex.Replace(stageName, @"\D", "");
         stageLevel = int.Parse(tempStr);
 
+        if (stageLevel > Max_Stage)
+            stageLevel = Max_Stage;
 
         Stage_CardNum = 1 << stageLevel +1;
 
